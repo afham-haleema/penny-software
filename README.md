@@ -7,7 +7,6 @@ This is a fullstack monorepo web application built using:
 - 🧠 NgRx for state management
 - 🛢️ MongoDB Atlas for database
 - 📦 EmailJS for password reset
-- ☁️ Google Cloud Platform (GCP) for deployment
 - 🗂️ Nx.dev for monorepo management
 
 ---
@@ -28,8 +27,8 @@ libs/                # Shared libraries (optional)
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/afham-haleema/penny-software.git
+
 ```
 
 ### 2. Install Dependencies
@@ -107,9 +106,8 @@ NgRx is used for managing frontend state.
 |------------|-------------------------------|
 | Frontend   | Angular, Tailwind CSS         |
 | Backend    | NestJS, JWT, EmailJS, MongoDB |
-| State Mgmt | NgRx (Store, Effects)         |
-| Infra      | Google Cloud Run, GCS         |
-| DevTools   | Nx, GitHub, Docker            |
+| State Mgmt | NgRx (Store, Effects)         |   
+| DevTools   | Nx, GitHub                    |
 
 ---
 

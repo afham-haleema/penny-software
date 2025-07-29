@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "frontend": {
+      "source": "apps/frontend",
+      "buildCommand": "npx nx build frontend",
+      "outputDirectory": "dist/apps/frontend"
+    }
+  },
+  "buildCommand": "npx nx build frontend",
+  "outputDirectory": "dist/apps/frontend",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

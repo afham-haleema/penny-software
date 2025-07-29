@@ -5,19 +5,25 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ShopModule } from './shop/shop.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal:true}),
-    MongooseModule.forRoot(
-      'mongodb+srv://afham:afham1234@nodetuts.opiyiwf.mongodb.net/penny?retryWrites=true&w=majority'
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_URI'),
+      }),
+    }
+
     ),
     AuthModule,
     UserModule,
     ShopModule,
-    
+
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,49 @@
+<nav class="navbar">
+  <div class="navbar-left">
+    <div class="logo">Shopping App</div>
+  </div>
+  <div class="navbar-right">
+    <div class="user-menu" (click)="toggleUserDropdown()">
+      <i class="fa-regular fa-user user-icon"></i>
+      <div class="dropdown" [class.show]="isUserDropdown">
+        <button (click)="logout()" class="dropdown-item">Logout</button>
+      </div>
+    </div>
+    <div class="cart-icon" (click)="togglesidebar()">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="cart-count">{{ cartItemsCount | async }}</span>
+    </div>
+  </div>
+</nav>
+
+
+<div class="products-container">
+  <div *ngFor="let product of products" class="product-card">
+    <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
+    <h2 class="product-name">{{ product.name }}</h2>
+    <p class="product-price">BHD {{ product.price }}</p>
+    <button (click)="addTocart(product)" class="add-cart">Add to cart</button>
+  </div>
+</div>
+
+<div class="cart-sidebar" [class.open]="SidebarOpen" (clickOutside)="closesidebar()">
+  <button class="close-btn" (click)="closesidebar()"><i class="fas fa-times"></i></button>
+  <h2>Your Cart</h2>
+  <div *ngIf="(cartItems | async)?.length === 0">cart is empty</div>
+  <div *ngFor="let item of cartItems | async" class="cart-item">
+     <img [src]="item.product.image" alt="{{ item.product.name }}" />
+     <div>
+      <h3>{{ item.product.name }}</h3>
+      <p>BHD {{ item.product.price }} x {{ item.quantity }}</p>
+      <button (click)="decreaseQty(item.product._id)">-</button>
+      <button (click)="increaseQty(item.product._id)">+</button>
+      <button (click)="removeFromcart(item.product._id)">Remove</button>
+    </div>
+    </div>
+  <div class="cart-total">
+    Total: BHD {{ cartTotal | async | number:'1.2-2' }}
+  </div>
+  <button (click)="checkout()" [disabled]="(cartItems | async)?.length === 0">Checkout</button>
+
+  </div>
+

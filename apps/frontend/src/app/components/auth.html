@@ -1,0 +1,42 @@
+<div class="auth-container">
+  <h2>{{ isLogin ? 'Login' : 'Signup' }}</h2>
+  <form (ngSubmit)="submit()" #authForm="ngForm">
+    <div *ngIf="!isLogin">
+      <label>
+        Name:
+        <input type="text" name="name" [(ngModel)]="name" required />
+      </label>
+    </div>
+    <div>
+      <label>
+        Email:
+        <input type="email" name="email" [(ngModel)]="email" required />
+      </label>
+    </div>
+    <div>
+      <label>
+        Password:
+        <input type="password" name="password" [(ngModel)]="password" minlength="6" required />
+      </label>
+    </div>
+
+    <button type="submit" class="primary-btn">
+      {{ isLogin ? 'Login' : 'Signup' }}
+    </button>
+
+    <button
+      (click)="openresetDialog()"
+      type="button"
+      *ngIf="isLogin"
+      class="forgot-btn"
+    >
+      Forgot your password?
+    </button>
+  </form>
+
+  <p class="toggle-text" (click)="toggle()">
+    {{ isLogin ? "Don't have an account? Signup" : 'Already have an account? Login' }}
+  </p>
+
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>

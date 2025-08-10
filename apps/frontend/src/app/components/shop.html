@@ -7,6 +7,8 @@
       <i class="fa-regular fa-user user-icon"></i>
       <div class="dropdown" [class.show]="isUserDropdown">
         <button (click)="logout()" class="dropdown-item">Logout</button>
+        <button (click)="loadProfile()" class="dropdown-item">Update Profile</button>
+        <button (click)="showDeleteDialog=true" class="dropdown-item">Delete Account</button>
       </div>
     </div>
     <div class="cart-icon" (click)="togglesidebar()">
@@ -15,6 +17,28 @@
     </div>
   </div>
 </nav>
+
+<div class="dialog-overlay" *ngIf="showDeleteDialog">
+  <div class="dialog-box">
+    <h3>Are you sure u want to delete your account ?</h3>
+    <button (click)="deleteProfile()">Yes</button>
+    <button (click)="showDeleteDialog=false">No</button>
+  </div>
+</div>
+
+<div class="dialog-overlay" *ngIf="showUpdateDialog">
+  <div class="dialog-box">
+    <h3>Update your account</h3>
+    <label for="name">Updated name
+      <input type="text" placeholder="Enter your new name" [(ngModel)]="name" />
+    </label>
+    <label for="password">Updated password
+      <input type="password" placeholder="Enter your new password" [(ngModel)]="password"/>
+    </label>
+    <button (click)="updateProfile()">Update account</button>
+    <button (click)="showUpdateDialog=false">cancel</button>
+  </div>
+</div>
 
 
 <div class="products-container">
@@ -31,19 +55,18 @@
   <h2>Your Cart</h2>
   <div *ngIf="(cartItems | async)?.length === 0">cart is empty</div>
   <div *ngFor="let item of cartItems | async" class="cart-item">
-     <img [src]="item.product.image" alt="{{ item.product.name }}" />
-     <div>
+    <img [src]="item.product.image" alt="{{ item.product.name }}" />
+    <div>
       <h3>{{ item.product.name }}</h3>
       <p>BHD {{ item.product.price }} x {{ item.quantity }}</p>
       <button (click)="decreaseQty(item.product._id)">-</button>
       <button (click)="increaseQty(item.product._id)">+</button>
       <button (click)="removeFromcart(item.product._id)">Remove</button>
     </div>
-    </div>
+  </div>
   <div class="cart-total">
     Total: BHD {{ cartTotal | async | number:'1.2-2' }}
   </div>
   <button (click)="checkout()" [disabled]="(cartItems | async)?.length === 0">Checkout</button>
 
-  </div>
-
+</div>

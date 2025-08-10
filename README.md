@@ -17,7 +17,7 @@ This is a fullstack monorepo web application built using:
 apps/
   ├── frontend       # Angular App
   └── backend        # NestJS API
-libs/                # Shared libraries (optional)
+libs/                # Shared libraries 
 ```
 
 ---
